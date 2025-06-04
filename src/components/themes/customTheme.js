@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material";
 
-export const CustomTheme = createTheme({
+export const customTheme = createTheme({
     typography: {
         fontFamily: [ 'cursive', 'Roboto',
         'Raleway',

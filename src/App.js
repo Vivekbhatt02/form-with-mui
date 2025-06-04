@@ -1,22 +1,31 @@
 import React,{useState} from 'react';
 import {ThemeProvider} from '@emotion/react';
-import {CustomTheme} from './CustomTheme';
-import {Button, Container, FormControl, InputLabel, Input, Typography} from '@mui/material';
+import {customTheme} from './components/themes/customTheme';
+import {Box, Button, Container, FormControl, InputLabel, Input, Typography} from '@mui/material';
+
+const pagestyle = {
+  backgroundColor: 'rgb(239, 239, 239)',
+  height: '100vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
 
 const containerStyle = {
-  backgroundColor:'white',
-  height: '40vh',
+  backgroundColor: 'white',
   width: '20rem',
-  marginTop: '25vh',
+  paddingTop: '4rem',
+  paddingBottom: '4rem',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   gap: '2rem',
-  borderRadius:'1rem',
-  boxShadow: 
-   ' 0.1875rem 0.1875rem 0.3125rem rgba(0, 0, 0, 0.2), -0.1875rem -0.1875rem 0.3125rem rgba(0, 0, 0, 0.2)'
-
+  borderRadius: '1rem',
+  boxShadow: [
+  "0.1875rem 0.1875rem 0.3125rem rgba(0, 0, 0, 0.2)",
+  " -0.1875rem -0.1875rem 0.3125rem rgba(0, 0, 0, 0.2)"
+  ].join(',')
 };
 
 export default function App() {
@@ -29,23 +38,25 @@ export default function App() {
     setName('')
   }
   return (
-    <ThemeProvider theme={CustomTheme}>
-      <Container sx={containerStyle}>
-        <FormControl defaultValue="" required>
-          <InputLabel htmlFor="name-input">Name</InputLabel>
-          <Input id="name-input"
-            placeholder="Write your name here"
-            onChange={(event) => setName(event.target.value)}
-            value={name}
-          />
-        </FormControl>
-        <Button onClick={handleFormSubmit} variant='contained' sx={{width:'10rem'}}>
-          Submit
-        </Button>
-        <Typography sx={{ textAlign: 'center' }}>
-          Submitted Name:{submittedName}
-        </Typography>
-      </Container>
+    <ThemeProvider theme={customTheme}>
+      <Box sx={pagestyle}>
+        <Container sx={containerStyle}>
+          <FormControl defaultValue="" required>
+            <InputLabel htmlFor="name-input">Name</InputLabel>
+            <Input id="name-input"
+              placeholder="Write your name here"
+              onChange={(event) => setName(event.target.value)}
+              value={name}
+            />
+          </FormControl>
+          <Button onClick={handleFormSubmit} variant='contained' sx={{width:'10rem'}}>
+            Submit
+          </Button>
+          <Typography sx={{ textAlign: 'center' }}>
+            Submitted Name:{submittedName}
+          </Typography>
+        </Container>
+      </Box>
     </ThemeProvider>
   );
 }
