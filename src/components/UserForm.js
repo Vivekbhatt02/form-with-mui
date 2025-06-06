@@ -49,7 +49,7 @@ export default function UserForm() {
 
     return (
         <ThemeProvider theme={customTheme}>
-            <Box sx={pagestyle}>
+            <Box sx={pageStyle}>
                 <Container sx={containerStyle}>
                     <FormControl defaultValue="">
                         <InputLabel htmlFor="name-input">Name</InputLabel>
