@@ -40,7 +40,7 @@ const containerStyle = {
     boxShadow: [
         "0.1875rem 0.1875rem 0.3125rem rgba(0, 0, 0, 0.2)",
         " -0.1875rem -0.1875rem 0.3125rem rgba(0, 0, 0, 0.2)"
-    ].join(',')
+    ].join(','),
 };
 
 export default function Userform() {
@@ -98,7 +98,7 @@ export default function Userform() {
                     </Button>
                     <Box sx={{justifyContent: 'flex-start'}}>
                         <Typography>
-                            Submitted Name:{submittedDetails.name}
+                            Name:{submittedDetails.name}
                         </Typography>
                         <Typography>
                             Gender:{submittedDetails.gender}
