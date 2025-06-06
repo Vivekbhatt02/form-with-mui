@@ -38,14 +38,14 @@ const containerStyle = {
 };
 
 export default function UserForm() {
-    const [name, setName] = useState('')
-    const [submittedName, setSubmittedName] = useState('')
+    const [name, setName] = useState('');
+    const [submittedName, setSubmittedName] = useState('');
 
     const handleFormSubmit = (event) => {
-        event.preventDefault()
-        setSubmittedName(name)
-        setName('')
-    }
+        event.preventDefault();
+        setSubmittedName(name);
+        setName('');
+    };
 
     return (
         <ThemeProvider theme={customTheme}>
