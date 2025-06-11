@@ -43,7 +43,7 @@ const containerStyle = {
     ].join(','),
 };
 
-export default function Userform() {
+export default function UserForm() {
     const [name, setName] = useState('');
     const [gender, setGender] = useState('');
     const [dob, setDOB] = useState(null);
