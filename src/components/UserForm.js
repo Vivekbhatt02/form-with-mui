@@ -6,9 +6,15 @@ import {
     FormControl,
     InputLabel,
     Input,
-    Typography
+    Typography,
+    Select,
+    MenuItem
 } from '@mui/material';
 import {ThemeProvider} from '@emotion/react';
+
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 
 import {customTheme} from './themes/customTheme';
 
@@ -28,30 +34,34 @@ const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: '2rem',
     borderRadius: '1rem',
     boxShadow: [
         "0.1875rem 0.1875rem 0.3125rem rgba(0, 0, 0, 0.2)",
         " -0.1875rem -0.1875rem 0.3125rem rgba(0, 0, 0, 0.2)"
-    ].join(',')
+    ].join(','),
 };
 
 export default function UserForm() {
     const [name, setName] = useState('');
-    const [submittedName, setSubmittedName] = useState('');
+    const [gender, setGender] = useState('');
+    const [dob, setDOB] = useState(null);
+    const [submittedDetails, setSubmittedDetails] = useState({name: '', gender: '', dob: '',});
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        setSubmittedName(name);
+        setSubmittedDetails({name, gender, dob});
         setName('');
+        setGender('');
+        setDOB(null);
     };
 
     return (
         <ThemeProvider theme={customTheme}>
             <Box sx={pageStyle}>
                 <Container sx={containerStyle}>
-                    <FormControl defaultValue="">
+                    <FormControl required sx={{width: '100%'}}>
                         <InputLabel htmlFor="name-input">Name</InputLabel>
                         <Input
                             id="name-input"
@@ -60,12 +70,43 @@ export default function UserForm() {
                             value={name}
                         />
                     </FormControl>
-                    <Button onClick={handleFormSubmit} variant='contained' sx={{width: '10rem'}}>
+                    <FormControl sx={{width: '100%'}}>
+                        <InputLabel>Gender</InputLabel>
+                        <Select
+                            label='Gender'
+                            onChange={(event) => setGender(event.target.value)}
+                            value={gender}
+                        >
+                            <MenuItem value="Male">Male</MenuItem>
+                            <MenuItem value="Female">Female</MenuItem>
+                            <MenuItem value="Others">Others</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <FormControl sx={{width: '100%'}}>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker
+                                label={'DOB'}
+                                views={['year', 'month', 'day']}
+                                sx={{minWidth: 250}}
+                                onChange={(event) => setDOB(event)}
+                                value={dob}
+                            />
+                        </LocalizationProvider>
+                    </FormControl>
+                    <Button onClick={handleFormSubmit} variant='contained' sx={{width: '100%'}}>
                         Submit
                     </Button>
-                    <Typography sx={{textAlign: 'center'}}>
-                        Submitted Name:{submittedName}
-                    </Typography>
+                    <Box sx={{justifyContent: 'flex-start'}}>
+                        <Typography>
+                            Name:{submittedDetails.name}
+                        </Typography>
+                        <Typography>
+                            Gender:{submittedDetails.gender}
+                        </Typography>
+                        <Typography>
+                            Age:{submittedDetails.dob && submittedDetails.dob.format('DD-MM-YYYY')}
+                        </Typography>
+                    </Box>
                 </Container>
             </Box>
         </ThemeProvider>
