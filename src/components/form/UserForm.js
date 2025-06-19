@@ -51,6 +51,8 @@ export default function UserForm() {
         setDOB(null);
     };
 
+    const enableSubmitButton = name.trim().length === 0 || !gender || !dob;
+
     return (
         <ThemeProvider theme={customTheme}>
             <Box sx={pageStyle}>
@@ -58,7 +60,12 @@ export default function UserForm() {
                     <InputField name={name} setName={setName}/>
                     <GenderSelect gender={gender} setGender={setGender}/>
                     <DatePickerField dob={dob} setDOB={setDOB}/>
-                    <Button onClick={handleFormSubmit} variant='contained' sx={{width: '100%'}}>
+                    <Button
+                        variant='contained'
+                        sx={{width: '100%'}}
+                        onClick={handleFormSubmit}
+                        disabled={enableSubmitButton}
+                    >
                         Submit
                     </Button>
                     <DisplayPanel submittedDetails={submittedDetails}/>
