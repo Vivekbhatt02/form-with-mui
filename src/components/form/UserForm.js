@@ -23,6 +23,7 @@ const pageStyle = {
 const containerStyle = {
     backgroundColor: 'white',
     width: '20rem',
+    height: '30rem',
     paddingTop: '4rem',
     paddingBottom: '4rem',
     display: 'flex',
@@ -43,6 +44,9 @@ export default function UserForm() {
     const [dob, setDOB] = useState(null);
     const [submittedDetails, setSubmittedDetails] = useState({name: '', gender: '', dob: '',});
 
+    const showError = name.trim().length === 0;
+    const enableSubmitButton = showError || !gender || !dob;
+
     const handleFormSubmit = (event) => {
         event.preventDefault();
         setSubmittedDetails({name, gender, dob});
@@ -51,13 +55,11 @@ export default function UserForm() {
         setDOB(null);
     };
 
-    const enableSubmitButton = name.trim().length === 0 || !gender || !dob;
-
     return (
         <ThemeProvider theme={customTheme}>
             <Box sx={pageStyle}>
                 <Container sx={containerStyle}>
-                    <InputField name={name} setName={setName}/>
+                    <InputField name={name} setName={setName} showError={showError}/>
                     <GenderSelect gender={gender} setGender={setGender}/>
                     <DatePickerField dob={dob} setDOB={setDOB}/>
                     <Button
