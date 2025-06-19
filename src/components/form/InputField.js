@@ -1,9 +1,10 @@
 import React from "react";
-import {InputLabel, FormControl, Input} from "@mui/material";
+import {InputLabel, FormControl, Input, FormHelperText} from "@mui/material";
 
-export default function InputField({name, setName}) {
+export default function InputField({name, setName, showError}) {
+
     return (
-        <FormControl required sx={{width: '100%'}}>
+        <FormControl error={showError} sx={{width: '100%', minHeight: '3rem'}}>
             <InputLabel htmlFor="name-input">Name</InputLabel>
             <Input
                 id="name-input"
@@ -11,6 +12,13 @@ export default function InputField({name, setName}) {
                 onChange={(event) => setName(event.target.value)}
                 value={name}
             />
+            {
+                showError
+                &&
+                <FormHelperText focused>
+                    Name should not be empty.
+                </FormHelperText>
+            }
         </FormControl>
     )
 }
