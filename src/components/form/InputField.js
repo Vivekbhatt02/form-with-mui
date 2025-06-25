@@ -1,10 +1,10 @@
 import React from "react";
 import {InputLabel, FormControl, Input, FormHelperText} from "@mui/material";
 
-export default function InputField({name, setName, showError}) {
+export default function InputField({name, setName, isNameNotEntered}) {
 
     return (
-        <FormControl error={showError} sx={{width: '100%', minHeight: '3rem'}}>
+        <FormControl error={isNameNotEntered} sx={{width: '100%', minHeight: '3rem'}}>
             <InputLabel htmlFor="name-input">Name</InputLabel>
             <Input
                 id="name-input"
@@ -13,7 +13,7 @@ export default function InputField({name, setName, showError}) {
                 value={name}
             />
             {
-                showError
+                isNameNotEntered
                 &&
                 <FormHelperText focused>
                     Name should not be empty.

@@ -44,8 +44,8 @@ export default function UserForm() {
     const [dob, setDOB] = useState(null);
     const [submittedDetails, setSubmittedDetails] = useState({name: '', gender: '', dob: '',});
 
-    const showError = name.trim().length === 0;
-    const enableSubmitButton = showError || !gender || !dob;
+    const isNameNotEntered = name.trim().length === 0;
+    const enableSubmitButton = isNameNotEntered || !gender || !dob;
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -59,15 +59,14 @@ export default function UserForm() {
         <ThemeProvider theme={customTheme}>
             <Box sx={pageStyle}>
                 <Container sx={containerStyle}>
-                    <InputField name={name} setName={setName} showError={showError}/>
+                    <InputField name={name} setName={setName} showError={isNameNotEntered}/>
                     <GenderSelect gender={gender} setGender={setGender}/>
                     <DatePickerField dob={dob} setDOB={setDOB}/>
                     <Button
                         variant='contained'
                         sx={{width: '100%'}}
                         onClick={handleFormSubmit}
-                        disabled={enableSubmitButton}
-                    >
+                        disabled={enableSubmitButton}>
                         Submit
                     </Button>
                     <DisplayPanel submittedDetails={submittedDetails}/>
