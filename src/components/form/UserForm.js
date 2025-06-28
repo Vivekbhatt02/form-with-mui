@@ -59,7 +59,7 @@ export default function UserForm() {
         <ThemeProvider theme={customTheme}>
             <Box sx={pageStyle}>
                 <Container sx={containerStyle}>
-                    <InputField name={name} setName={setName} showError={isNameNotEntered}/>
+                    <InputField name={name} setName={setName} isNameNotEntered={isNameNotEntered}/>
                     <GenderSelect gender={gender} setGender={setGender}/>
                     <DatePickerField dob={dob} setDOB={setDOB}/>
                     <Button

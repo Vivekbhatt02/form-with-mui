@@ -9,8 +9,7 @@ export default function GenderSelect({gender, setGender}) {
             <Select
                 label='Gender'
                 onChange={(event) => setGender(event.target.value)}
-                value={gender}
-            >
+                value={gender}>
                 <MenuItem value="Male">Male</MenuItem>
                 <MenuItem value="Female">Female</MenuItem>
                 <MenuItem value="Others">Others</MenuItem>
