@@ -10,7 +10,6 @@ import {customTheme} from '../themes/customTheme';
 import InputField from "./InputField";
 import GenderSelect from "./GenderSelect";
 import DatePickerField from "./DatePickerField";
-import DisplayPanel from "./DisplayPanel";
 import SubmissionHistoryPanel from "./SubmissionHistoryPanel";
 
 const pageStyle = {
@@ -25,8 +24,8 @@ const containerStyle = {
     backgroundColor: 'white',
     width: '25rem',
     height: 'auto',
-    paddingTop: '4rem',
-    paddingBottom: '4rem',
+    paddingTop: '1rem',
+    paddingBottom: '1rem',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -44,7 +43,6 @@ export default function UserForm() {
     const [gender, setGender] = useState('');
     const [dob, setDOB] = useState(null);
     const [isNameBlank, setIsNameBlank] = useState(false);
-    const [submittedDetails, setSubmittedDetails] = useState({name: '', gender: '', dob: ''});
     const [submissionHistory, setSubmissionHistory] = useState([])
     const isSubmitDisabled = !name || !gender || !dob;
 
@@ -57,7 +55,6 @@ export default function UserForm() {
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        setSubmittedDetails({name, gender, dob});
         setSubmissionHistory((prevSubmission) => [...prevSubmission, {name, gender, dob}]);
         setName('');
         setGender('');
@@ -67,7 +64,6 @@ export default function UserForm() {
 
     const handleClearHistory = () => {
         setSubmissionHistory([]);
-        setSubmittedDetails({name: '', gender: '', dob: ''});
     }
 
     return (
@@ -84,7 +80,6 @@ export default function UserForm() {
                         disabled={isSubmitDisabled}>
                         Submit
                     </Button>
-                    <DisplayPanel submittedDetails={submittedDetails}/>
                     <SubmissionHistoryPanel submissionHistory={submissionHistory}/>
                     <Button
                         variant="contained"
