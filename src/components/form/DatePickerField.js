@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import { FormControl } from "@mui/material";
+import {FormControl} from "@mui/material";
 import {DatePicker} from "@mui/x-date-pickers";
 
 export default function DatePickerField({ dob, setDOB }) {
