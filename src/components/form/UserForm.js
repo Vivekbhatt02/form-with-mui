@@ -23,6 +23,7 @@ const pageStyle = {
 const containerStyle = {
     backgroundColor: 'white',
     width: '20rem',
+    height: '30rem',
     paddingTop: '4rem',
     paddingBottom: '4rem',
     display: 'flex',
@@ -41,7 +42,17 @@ export default function UserForm() {
     const [name, setName] = useState('');
     const [gender, setGender] = useState('');
     const [dob, setDOB] = useState(null);
+    const [isNameBlank, setIsNameBlank] = useState(false);
     const [submittedDetails, setSubmittedDetails] = useState({name: '', gender: '', dob: '',});
+
+    const isSubmitDisabled = !name || !gender || !dob;
+
+    const handleNameChange = (event) => {
+        setName(event.target.value);
+        if (event.target.value.trim().length === 0) {
+            setIsNameBlank(true);
+        }
+    }
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -49,16 +60,21 @@ export default function UserForm() {
         setName('');
         setGender('');
         setDOB(null);
+        setIsNameBlank(false);
     };
 
     return (
         <ThemeProvider theme={customTheme}>
             <Box sx={pageStyle}>
                 <Container sx={containerStyle}>
-                    <InputField name={name} setName={setName}/>
+                    <InputField value={name} error={isNameBlank} onChange={handleNameChange}/>
                     <GenderSelect gender={gender} setGender={setGender}/>
                     <DatePickerField dob={dob} setDOB={setDOB}/>
-                    <Button onClick={handleFormSubmit} variant='contained' sx={{width: '100%'}}>
+                    <Button
+                        variant='contained'
+                        sx={{width: '100%'}}
+                        onClick={handleFormSubmit}
+                        disabled={isSubmitDisabled}>
                         Submit
                     </Button>
                     <DisplayPanel submittedDetails={submittedDetails}/>
