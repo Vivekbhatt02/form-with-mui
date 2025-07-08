@@ -11,6 +11,7 @@ import InputField from "./InputField";
 import GenderSelect from "./GenderSelect";
 import DatePickerField from "./DatePickerField";
 import DisplayPanel from "./DisplayPanel";
+import SubmissionHistoryPanel from "./SubmissionHistoryPanel";
 
 const pageStyle = {
     backgroundColor: 'rgb(239, 239, 239)',
@@ -22,8 +23,8 @@ const pageStyle = {
 
 const containerStyle = {
     backgroundColor: 'white',
-    width: '20rem',
-    height: '30rem',
+    width: '25rem',
+    height: 'auto',
     paddingTop: '4rem',
     paddingBottom: '4rem',
     display: 'flex',
@@ -43,8 +44,8 @@ export default function UserForm() {
     const [gender, setGender] = useState('');
     const [dob, setDOB] = useState(null);
     const [isNameBlank, setIsNameBlank] = useState(false);
-    const [submittedDetails, setSubmittedDetails] = useState({name: '', gender: '', dob: '',});
-
+    const [submittedDetails, setSubmittedDetails] = useState({name: '', gender: '', dob: ''});
+    const [submissionHistory, setSubmissionHistory] = useState([])
     const isSubmitDisabled = !name || !gender || !dob;
 
     const handleNameChange = (event) => {
@@ -57,11 +58,17 @@ export default function UserForm() {
     const handleFormSubmit = (event) => {
         event.preventDefault();
         setSubmittedDetails({name, gender, dob});
+        setSubmissionHistory((prevSubmission) => [...prevSubmission, {name, gender, dob}]);
         setName('');
         setGender('');
         setDOB(null);
         setIsNameBlank(false);
     };
+
+    const handleClearHistory = () => {
+        setSubmissionHistory([]);
+        setSubmittedDetails({name: '', gender: '', dob: ''});
+    }
 
     return (
         <ThemeProvider theme={customTheme}>
@@ -78,6 +85,13 @@ export default function UserForm() {
                         Submit
                     </Button>
                     <DisplayPanel submittedDetails={submittedDetails}/>
+                    <SubmissionHistoryPanel submissionHistory={submissionHistory}/>
+                    <Button
+                        variant="contained"
+                        sx={{width: "7rem", marginTop: "1rem", marginLeft: "auto"}}
+                        onClick={handleClearHistory}>
+                        Clear All
+                    </Button>
                 </Container>
             </Box>
         </ThemeProvider>
