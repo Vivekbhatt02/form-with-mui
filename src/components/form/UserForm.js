@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
     Box,
     Button,
@@ -11,6 +11,8 @@ import InputField from "./InputField";
 import GenderSelect from "./GenderSelect";
 import DatePickerField from "./DatePickerField";
 import SubmissionHistoryPanel from "./SubmissionHistoryPanel";
+import {useSelector, useDispatch} from "react-redux";
+import {submitForm, clearHistory, resetForm} from "../../feature/userform/userFormSlice";
 
 const pageStyle = {
     backgroundColor: 'rgb(239, 239, 239)',
@@ -39,40 +41,28 @@ const containerStyle = {
 };
 
 export default function UserForm() {
-    const [name, setName] = useState('');
-    const [gender, setGender] = useState('');
-    const [dob, setDOB] = useState(null);
-    const [isNameBlank, setIsNameBlank] = useState(false);
-    const [submissionHistory, setSubmissionHistory] = useState([])
+    const dispatch = useDispatch();
+    const {name, gender, dob, submissionHistory} = useSelector(state => state.userForm);
     const isSubmitDisabled = !name || !gender || !dob;
 
-    const handleNameChange = (event) => {
-        setName(event.target.value);
-        if (event.target.value.trim().length === 0) {
-            setIsNameBlank(true);
+    const handleFormSubmit = () => {
+        if (!isSubmitDisabled) {
+            dispatch(submitForm());
+            dispatch(resetForm());
         }
     }
 
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
-        setSubmissionHistory((prevSubmission) => [...prevSubmission, {name, gender, dob}]);
-        setName('');
-        setGender('');
-        setDOB(null);
-        setIsNameBlank(false);
-    };
-
     const handleClearHistory = () => {
-        setSubmissionHistory([]);
-    }
+        dispatch(clearHistory());
+    };
 
     return (
         <ThemeProvider theme={customTheme}>
             <Box sx={pageStyle}>
                 <Container sx={containerStyle}>
-                    <InputField value={name} error={isNameBlank} onChange={handleNameChange}/>
-                    <GenderSelect gender={gender} setGender={setGender}/>
-                    <DatePickerField dob={dob} setDOB={setDOB}/>
+                    <InputField value={name}/>
+                    <GenderSelect value={gender}/>
+                    <DatePickerField value={dob}/>
                     <Button
                         variant='contained'
                         sx={{width: '100%'}}

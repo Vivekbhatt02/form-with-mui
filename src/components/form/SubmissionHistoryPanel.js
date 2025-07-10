@@ -15,8 +15,8 @@ export default function SubmissionHistoryPanel({submissionHistory}) {
             width: 110,
         },
         {
-            field: 'age',
-            headerName: 'Age',
+            field: 'dob',
+            headerName: 'DOB',
             width: 110,
         },
     ]
@@ -25,7 +25,7 @@ export default function SubmissionHistoryPanel({submissionHistory}) {
         id: index,
         name: submission.name,
         gender: submission.gender,
-        age: submission.dob.format('DD/MM/YYYY')
+        dob: submission.dob.format('DD-MM-YYYY'),
     }));
 
     return (
@@ -44,8 +44,7 @@ export default function SubmissionHistoryPanel({submissionHistory}) {
                             },
                         },
                     }}
-                    pageSizeOptions={[5]}
-                />
+                    pageSizeOptions={[5]}/>
             </Box>
         </>
     )
