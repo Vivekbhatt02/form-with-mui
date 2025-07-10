@@ -5,14 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterMoment} from '@mui/x-date-pickers/AdapterMoment';
+import store from './redux/Store';
+import {Provider} from 'react-redux'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-      <LocalizationProvider dateAdapter={AdapterMoment}>
-          <App />
-      </LocalizationProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <Provider store={store}>
+            <LocalizationProvider dateAdapter={AdapterMoment}>
+                <App/>
+            </LocalizationProvider>
+        </Provider>
+
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

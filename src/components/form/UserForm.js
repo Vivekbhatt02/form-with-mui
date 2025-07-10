@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
     Box,
     Button,
@@ -10,7 +10,9 @@ import {customTheme} from '../themes/customTheme';
 import InputField from "./InputField";
 import GenderSelect from "./GenderSelect";
 import DatePickerField from "./DatePickerField";
-import DisplayPanel from "./DisplayPanel";
+import SubmissionHistoryPanel from "./SubmissionHistoryPanel";
+import {useSelector, useDispatch} from "react-redux";
+import {submitForm, clearHistory, resetForm} from "../../feature/userform/userFormSlice";
 
 const pageStyle = {
     backgroundColor: 'rgb(239, 239, 239)',
@@ -22,10 +24,10 @@ const pageStyle = {
 
 const containerStyle = {
     backgroundColor: 'white',
-    width: '20rem',
-    height: '30rem',
-    paddingTop: '4rem',
-    paddingBottom: '4rem',
+    width: '25rem',
+    height: 'auto',
+    paddingTop: '1rem',
+    paddingBottom: '1rem',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -39,37 +41,28 @@ const containerStyle = {
 };
 
 export default function UserForm() {
-    const [name, setName] = useState('');
-    const [gender, setGender] = useState('');
-    const [dob, setDOB] = useState(null);
-    const [isNameBlank, setIsNameBlank] = useState(false);
-    const [submittedDetails, setSubmittedDetails] = useState({name: '', gender: '', dob: '',});
-
+    const dispatch = useDispatch();
+    const {name, gender, dob, submissionHistory} = useSelector(state => state.userForm);
     const isSubmitDisabled = !name || !gender || !dob;
 
-    const handleNameChange = (event) => {
-        setName(event.target.value);
-        if (event.target.value.trim().length === 0) {
-            setIsNameBlank(true);
+    const handleFormSubmit = () => {
+        if (!isSubmitDisabled) {
+            dispatch(submitForm());
+            dispatch(resetForm());
         }
     }
 
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
-        setSubmittedDetails({name, gender, dob});
-        setName('');
-        setGender('');
-        setDOB(null);
-        setIsNameBlank(false);
+    const handleClearHistory = () => {
+        dispatch(clearHistory());
     };
 
     return (
         <ThemeProvider theme={customTheme}>
             <Box sx={pageStyle}>
                 <Container sx={containerStyle}>
-                    <InputField value={name} error={isNameBlank} onChange={handleNameChange}/>
-                    <GenderSelect gender={gender} setGender={setGender}/>
-                    <DatePickerField dob={dob} setDOB={setDOB}/>
+                    <InputField value={name}/>
+                    <GenderSelect value={gender}/>
+                    <DatePickerField value={dob}/>
                     <Button
                         variant='contained'
                         sx={{width: '100%'}}
@@ -77,7 +70,13 @@ export default function UserForm() {
                         disabled={isSubmitDisabled}>
                         Submit
                     </Button>
-                    <DisplayPanel submittedDetails={submittedDetails}/>
+                    <SubmissionHistoryPanel submissionHistory={submissionHistory}/>
+                    <Button
+                        variant="contained"
+                        sx={{width: "7rem", marginTop: "1rem", marginLeft: "auto"}}
+                        onClick={handleClearHistory}>
+                        Clear All
+                    </Button>
                 </Container>
             </Box>
         </ThemeProvider>
