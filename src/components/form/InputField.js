@@ -1,17 +1,17 @@
 import React from "react";
 import {InputLabel, FormControl, Input, FormHelperText} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {setIsNameVaild, setName} from "../../feature/userform/userFormSlice";
+import {setIsNameValid, setName} from "../../feature/userform/userFormSlice";
 
 export default function InputField({value}) {
     const dispatch = useDispatch();
-    const isNameValid = useSelector(state => state.userForm.isNameVaild);
+    const isNameValid = useSelector(state => state.userForm.isNameValid);
     const handleNameChange = (event) => {
         dispatch(setName(event.target.value));
         if (event.target.value.trim().length === 0) {
-            dispatch(setIsNameVaild(false));
+            dispatch(setIsNameValid(false));
         } else if (event.target.value.trim().length > 0){
-            dispatch(setIsNameVaild(true));
+            dispatch(setIsNameValid(true));
         }
     };
 
