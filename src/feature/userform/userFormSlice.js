@@ -7,7 +7,8 @@ export const userFormSlice = createSlice({
         gender: '',
         dob: null,
         submissionHistory: [],
-        isNameVaild: false,
+        isNameValid: true,
+        isPreviewDialogOpen: false,
     },
     reducers: {
         setName: (state, action) => {
@@ -34,12 +35,24 @@ export const userFormSlice = createSlice({
         clearHistory: (state) => {
             state.submissionHistory = []
         },
-        setIsNameVaild: (state, action) => {
-            state.isNameVaild = action.payload
-        }
+        setIsNameValid: (state, action) => {
+            state.isNameValid = action.payload
+        },
+        setIsPreviewDialogOpen: (state, action) => {
+            state.isPreviewDialogOpen = action.payload
+        },
     },
 })
 
-export const {setName, setGender, setDOB, submitForm, resetForm, clearHistory, setIsNameVaild} = userFormSlice.actions
+export const {
+    setName,
+    setGender,
+    setDOB,
+    submitForm,
+    resetForm,
+    clearHistory,
+    setIsNameValid,
+    setIsPreviewDialogOpen
+} = userFormSlice.actions
 
 export default userFormSlice.reducer
