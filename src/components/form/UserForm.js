@@ -11,8 +11,9 @@ import InputField from "./InputField";
 import GenderSelect from "./GenderSelect";
 import DatePickerField from "./DatePickerField";
 import SubmissionHistoryPanel from "./SubmissionHistoryPanel";
+import InputPreviewBox from "./InputPreviewBox";
 import {useSelector, useDispatch} from "react-redux";
-import {submitForm, clearHistory, resetForm} from "../../feature/userform/userFormSlice";
+import {clearHistory, setIsPreviewDialogOpen} from "../../feature/userform/userFormSlice";
 
 const pageStyle = {
     backgroundColor: 'rgb(239, 239, 239)',
@@ -46,11 +47,8 @@ export default function UserForm() {
     const isSubmitDisabled = !name || !gender || !dob;
 
     const handleFormSubmit = () => {
-        if (!isSubmitDisabled) {
-            dispatch(submitForm());
-            dispatch(resetForm());
-        }
-    }
+        dispatch(setIsPreviewDialogOpen(true));
+    };
 
     const handleClearHistory = () => {
         dispatch(clearHistory());
@@ -79,6 +77,7 @@ export default function UserForm() {
                     </Button>
                 </Container>
             </Box>
+            <InputPreviewBox/>
         </ThemeProvider>
     );
 }
