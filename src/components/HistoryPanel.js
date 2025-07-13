@@ -1,23 +1,28 @@
 import Box from '@mui/material/Box';
 import {DataGrid} from '@mui/x-data-grid';
-import {Typography} from "@mui/material";
+import {Container, Typography} from "@mui/material";
+import Button from "@mui/material/Button";
+import {useDispatch, useSelector} from "react-redux";
+import {clearHistory} from "../feature/userform/userFormSlice";
 
-export default function SubmissionHistoryPanel({submissionHistory}) {
+export default function HistoryPanel() {
+    const dispatch = useDispatch();
+    const {submissionHistory} = useSelector(state => state.userForm);
     const columns = [
         {
             field: 'name',
             headerName: 'Name',
-            width: 130,
+            width: 300,
         },
         {
             field: 'gender',
             headerName: 'Gender',
-            width: 110,
+            width: 300,
         },
         {
             field: 'dob',
             headerName: 'DOB',
-            width: 110,
+            width: 300,
         },
     ]
 
@@ -28,12 +33,16 @@ export default function SubmissionHistoryPanel({submissionHistory}) {
         dob: submission.dob.format('DD-MM-YYYY'),
     }));
 
+    const handleClearHistory = () => {
+        dispatch(clearHistory());
+    };
+
     return (
-        <>
-            <Typography variant="h6" sx={{fontWeight: '600',marginBottom: '-2rem'}}>
+        <Container sx={{marginTop: '4rem', width: '60rem'}}>
+            <Typography variant="h6" sx={{fontWeight: '600', marginBottom: '-2rem'}}>
                 Submission History
             </Typography>
-            <Box sx={{height: 400, width: '100%'}}>
+            <Box sx={{width: '100%'}}>
                 <DataGrid
                     rows={rows}
                     columns={columns}
@@ -46,6 +55,12 @@ export default function SubmissionHistoryPanel({submissionHistory}) {
                     }}
                     pageSizeOptions={[5]}/>
             </Box>
-        </>
+            <Button
+                variant="contained"
+                sx={{width: "7rem", marginTop: "1rem", marginLeft: "auto"}}
+                onClick={handleClearHistory}>
+                Clear All
+            </Button>
+        </Container>
     )
 }
