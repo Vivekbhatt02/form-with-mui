@@ -9,22 +9,19 @@ export default function NavigationBar() {
                 <Button
                     component={Link}
                     to="/"
-                    color='white'
-                >
+                    color='white'>
                     Form
                 </Button>
                 <Button
                     component={Link}
                     to="/history"
-                    color='white'
-                >
+                    color='white'>
                     History
                 </Button>
                 <Button
                     component={Link}
                     to="/about"
-                    color='white'
-                >
+                    color='white'>
                     About
                 </Button>
             </Toolbar>
