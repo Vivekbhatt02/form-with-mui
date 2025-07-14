@@ -13,6 +13,7 @@ import DatePickerField from "./DatePickerField";
 import InputPreviewBox from "./InputPreviewBox";
 import {useSelector, useDispatch} from "react-redux";
 import {setIsPreviewDialogOpen} from "../../feature/userform/userFormSlice";
+import Alert from "@mui/material/Alert";
 
 const pageStyle = {
     backgroundColor: 'rgb(239, 239, 239)',
@@ -40,9 +41,16 @@ const containerStyle = {
     ].join(','),
 };
 
+const alertStyle = {
+    width: '14rem',
+    position: 'absolute',
+    marginTop: '10%',
+    left:'43%'
+};
+
 export default function UserForm() {
     const dispatch = useDispatch();
-    const {name, gender, dob} = useSelector(state => state.userForm);
+    const {name, gender, dob, showSuccessMessage} = useSelector(state => state.userForm);
     const isSubmitDisabled = !name || !gender || !dob;
 
     const handleFormSubmit = () => {
@@ -51,6 +59,11 @@ export default function UserForm() {
 
     return (
         <ThemeProvider theme={customTheme}>
+            {
+                showSuccessMessage
+                &&
+                <Alert severity="success" sx={alertStyle}>Form Submitted Successfully.</Alert>
+            }
             <Box sx={pageStyle}>
                 <Container sx={containerStyle}>
                     <InputField value={name}/>

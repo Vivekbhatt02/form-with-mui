@@ -1,42 +1,40 @@
 import React from 'react';
 import {Box, Typography, Paper, Divider} from '@mui/material';
 
+const pageBackgroundColor = '#ffffff'
+
+const pageStyle = {
+    minHeight: '93vh',
+    bgcolor: '#f0f2f5',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    px: 2,
+};
+
+const paperStyle = {
+    maxWidth: '56.25rem',
+    width: '100%',
+    p: '2rem',
+    borderRadius: '1rem',
+    bgcolor: pageBackgroundColor,
+};
+
 export default function About() {
     return (
-        <Box
-            sx={{
-                minHeight: '93vh',
-                bgcolor: '#f0f2f5',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                px: 2,
-            }}
-        >
-            <Paper
-                elevation={4}
-                sx={{
-                    maxWidth: '900px',
-                    width: '100%',
-                    p: 5,
-                    borderRadius: 3,
-                    bgcolor: '#ffffff',
-                }}
-            >
+        <Box sx={pageStyle}>
+            <Paper elevation={4} sx={paperStyle}>
                 <Typography variant="h3" gutterBottom align="center">
                     About This Project
                 </Typography>
-
-                <Divider sx={{mb: 4}}/>
-
+                <Divider sx={{mb: '2rem'}}/>
                 <Typography variant="body1">
                     This project is a modern, interactive, and modular form-based web application developed
                     using <strong>React.js</strong>, <strong>Redux</strong>, and <strong>Material UI (MUI)</strong>.
                     It demonstrates key front-end development practices like reusable components, form validation,
                     global state management, and multi-page routing.
                 </Typography>
-
-                <Typography variant="body1" mt={4}>
+                <Typography variant="body1" mt={'2rem'}>
                     📦 <strong>Technology Stack:</strong>
                 </Typography>
                 <ul>
@@ -47,8 +45,7 @@ export default function About() {
                     <li><strong>React Router</strong> – for client-side routing between pages</li>
                     <li><strong>JavaScript (ES6+)</strong> – for core logic and interactivity</li>
                 </ul>
-
-                <Typography variant="body1" mt={4}>
+                <Typography variant="body1" mt={'2rem'}>
                     🚀 <strong>Core Features Implemented:</strong>
                 </Typography>
                 <ul>
@@ -64,8 +61,7 @@ export default function About() {
                     <li>Global state management using Redux for form and history data</li>
                     <li>Multi-page navigation with full AppBar and routing setup</li>
                 </ul>
-
-                <Typography variant="body1" mt={4}>
+                <Typography variant="body1" mt={'2rem'}>
                     💡 <strong>Why This Project?</strong>
                 </Typography>
                 <Typography variant="body2" paragraph>
@@ -73,11 +69,9 @@ export default function About() {
                     It emphasizes modular architecture, UI consistency, and real-world app structure — making it easy to
                     scale and maintain.
                 </Typography>
-
-                <Typography variant="body1" mt={4}>
+                <Typography variant="body1" mt={'2rem'}>
                     👨‍💻 <strong>Created by:</strong> Vivek Bhatt
                 </Typography>
-
                 <Typography variant="body2">
                     React.js, Redux & JavaScript enthusiast | Skilled in building modular components, managing global
                     state,
