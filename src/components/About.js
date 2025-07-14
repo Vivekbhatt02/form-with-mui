@@ -36,7 +36,7 @@ export default function About() {
                     global state management, and multi-page routing.
                 </Typography>
 
-                <Typography variant="body1">
+                <Typography variant="body1" mt={4}>
                     📦 <strong>Technology Stack:</strong>
                 </Typography>
                 <ul>

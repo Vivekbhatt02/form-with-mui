@@ -39,7 +39,7 @@ export default function HistoryPanel() {
 
     return (
         <Container sx={{marginTop: '4rem', width: '60rem'}}>
-            <Typography variant="h6" sx={{fontWeight: '600', marginBottom: '-2rem'}}>
+            <Typography variant="h6" sx={{fontWeight: '600', marginBottom: '1rem'}}>
                 Submission History
             </Typography>
             <Box sx={{width: '100%'}}>
