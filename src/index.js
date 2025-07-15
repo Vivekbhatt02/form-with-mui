@@ -1,22 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterMoment} from '@mui/x-date-pickers/AdapterMoment';
 import store from './redux/Store';
 import {Provider} from 'react-redux'
+import {RouterProvider} from "react-router-dom";
+import router from '../src/navigation/Router';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <Provider store={store}>
             <LocalizationProvider dateAdapter={AdapterMoment}>
-                <App/>
+                <RouterProvider router={router}/>
             </LocalizationProvider>
         </Provider>
-
     </React.StrictMode>
 );
 

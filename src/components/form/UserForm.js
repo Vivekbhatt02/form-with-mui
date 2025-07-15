@@ -10,14 +10,14 @@ import {customTheme} from '../themes/customTheme';
 import InputField from "./InputField";
 import GenderSelect from "./GenderSelect";
 import DatePickerField from "./DatePickerField";
-import SubmissionHistoryPanel from "./SubmissionHistoryPanel";
 import InputPreviewBox from "./InputPreviewBox";
 import {useSelector, useDispatch} from "react-redux";
-import {clearHistory, setIsPreviewDialogOpen} from "../../feature/userform/userFormSlice";
+import {setIsPreviewDialogOpen} from "../../feature/userform/userFormSlice";
+import Alert from "@mui/material/Alert";
 
 const pageStyle = {
     backgroundColor: 'rgb(239, 239, 239)',
-    height: '100vh',
+    height: '93vh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -25,15 +25,15 @@ const pageStyle = {
 
 const containerStyle = {
     backgroundColor: 'white',
-    width: '25rem',
-    height: 'auto',
+    width: '20rem',
+    height: '30rem',
     paddingTop: '1rem',
     paddingBottom: '1rem',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    gap: '2rem',
+    gap: '3rem',
     borderRadius: '1rem',
     boxShadow: [
         "0.1875rem 0.1875rem 0.3125rem rgba(0, 0, 0, 0.2)",
@@ -41,21 +41,29 @@ const containerStyle = {
     ].join(','),
 };
 
+const alertStyle = {
+    width: '14rem',
+    position: 'absolute',
+    marginTop: '10%',
+    left:'43%'
+};
+
 export default function UserForm() {
     const dispatch = useDispatch();
-    const {name, gender, dob, submissionHistory} = useSelector(state => state.userForm);
+    const {name, gender, dob, showSuccessMessage} = useSelector(state => state.userForm);
     const isSubmitDisabled = !name || !gender || !dob;
 
     const handleFormSubmit = () => {
         dispatch(setIsPreviewDialogOpen(true));
     };
 
-    const handleClearHistory = () => {
-        dispatch(clearHistory());
-    };
-
     return (
         <ThemeProvider theme={customTheme}>
+            {
+                showSuccessMessage
+                &&
+                <Alert severity="success" sx={alertStyle}>Form Submitted Successfully.</Alert>
+            }
             <Box sx={pageStyle}>
                 <Container sx={containerStyle}>
                     <InputField value={name}/>
@@ -67,13 +75,6 @@ export default function UserForm() {
                         onClick={handleFormSubmit}
                         disabled={isSubmitDisabled}>
                         Submit
-                    </Button>
-                    <SubmissionHistoryPanel submissionHistory={submissionHistory}/>
-                    <Button
-                        variant="contained"
-                        sx={{width: "7rem", marginTop: "1rem", marginLeft: "auto"}}
-                        onClick={handleClearHistory}>
-                        Clear All
                     </Button>
                 </Container>
             </Box>

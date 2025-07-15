@@ -9,6 +9,7 @@ export const userFormSlice = createSlice({
         submissionHistory: [],
         isNameValid: true,
         isPreviewDialogOpen: false,
+        showSuccessMessage: false,
     },
     reducers: {
         setName: (state, action) => {
@@ -41,6 +42,9 @@ export const userFormSlice = createSlice({
         setIsPreviewDialogOpen: (state, action) => {
             state.isPreviewDialogOpen = action.payload
         },
+        setShowSuccessMessage: (state, action) => {
+            state.showSuccessMessage = action.payload
+        }
     },
 })
 
@@ -52,7 +56,8 @@ export const {
     resetForm,
     clearHistory,
     setIsNameValid,
-    setIsPreviewDialogOpen
+    setIsPreviewDialogOpen,
+    setShowSuccessMessage,
 } = userFormSlice.actions
 
 export default userFormSlice.reducer

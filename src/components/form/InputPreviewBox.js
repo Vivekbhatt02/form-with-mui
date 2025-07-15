@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -6,7 +6,12 @@ import {List} from "@mui/material";
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import {useDispatch, useSelector} from "react-redux";
-import {resetForm, setIsPreviewDialogOpen, submitForm} from "../../feature/userform/userFormSlice";
+import {
+    resetForm,
+    setIsPreviewDialogOpen,
+    setShowSuccessMessage,
+    submitForm
+} from "../../feature/userform/userFormSlice";
 
 const listStyle = {
     position: 'absolute',
@@ -36,6 +41,11 @@ export default function InputPreviewBox() {
         dispatch(submitForm());
         dispatch(resetForm());
         dispatch(setIsPreviewDialogOpen(false));
+        dispatch((setShowSuccessMessage(true)));
+        setTimeout(() => {
+            dispatch(setShowSuccessMessage(false));
+        }, 1500);
+
     };
 
     return (
@@ -60,6 +70,7 @@ export default function InputPreviewBox() {
                     </List>
                 </Box>
             </Modal>
+
         </Box>
     );
 }
