@@ -17,7 +17,7 @@ import GenderSelect from "./form/GenderSelect";
 import DatePickerField from "./form/DatePickerField";
 import {Typography} from "@mui/material";
 
-const style = {
+const editDialogStyle = {
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -81,7 +81,7 @@ export default function EditInfoDialog() {
             open={isEditDialogOpen}
             onClose={handleClose}
         >
-            <Box sx={style}>
+            <Box sx={editDialogStyle}>
                 <Typography variant="h6" sx={{fontWeight: '600'}}>Edit Details</Typography>
                 <InputField value={name}/>
                 <GenderSelect value={gender}/>
