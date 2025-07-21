@@ -42,19 +42,11 @@ export default function InputPreviewBox() {
         dispatch(resetForm());
         dispatch(setIsPreviewDialogOpen(false));
         dispatch((setShowSuccessMessage(true)));
-        setTimeout(() => {
-            dispatch(setShowSuccessMessage(false));
-        }, 1500);
-
     };
 
     return (
         <Box>
-            <Modal
-                open={isPreviewDialogOpen}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
+            <Modal open={isPreviewDialogOpen}>
                 <Box>
                     <List sx={listStyle}>
                         <ListItemText primary={`Name: ${name}`}/>
@@ -70,7 +62,6 @@ export default function InputPreviewBox() {
                     </List>
                 </Box>
             </Modal>
-
         </Box>
     );
 }

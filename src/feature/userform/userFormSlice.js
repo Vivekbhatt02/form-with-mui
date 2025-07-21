@@ -9,7 +9,10 @@ export const userFormSlice = createSlice({
         submissionHistory: [],
         isNameValid: true,
         isPreviewDialogOpen: false,
+        isEditDialogOpen: false,
         showSuccessMessage: false,
+        showDeleteConfirmation: false,
+        selectedIndex: null,
     },
     reducers: {
         setName: (state, action) => {
@@ -42,8 +45,26 @@ export const userFormSlice = createSlice({
         setIsPreviewDialogOpen: (state, action) => {
             state.isPreviewDialogOpen = action.payload
         },
+        setIsEditDialogOpen: (state, action) => {
+            state.isEditDialogOpen = action.payload
+        },
         setShowSuccessMessage: (state, action) => {
             state.showSuccessMessage = action.payload
+        },
+        setShowDeleteConfirmation: (state, action) => {
+            state.showDeleteConfirmation = action.payload
+        },
+        setSelectedIndex: (state, action) => {
+            state.selectedIndex = action.payload
+        },
+        updateHistoryItem: (state, action) => {
+            const {index, data} = action.payload;
+            state.submissionHistory[index] = data;
+
+        },
+        deleteSelectedHistoryItem: (state, action) => {
+            const index = action.payload.index;
+            state.submissionHistory.splice(index, 1);
         }
     },
 })
@@ -57,7 +78,12 @@ export const {
     clearHistory,
     setIsNameValid,
     setIsPreviewDialogOpen,
+    setIsEditDialogOpen,
     setShowSuccessMessage,
+    setSelectedIndex,
+    updateHistoryItem,
+    deleteSelectedHistoryItem,
+    setShowDeleteConfirmation
 } = userFormSlice.actions
 
 export default userFormSlice.reducer
