@@ -4,33 +4,19 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterMoment} from '@mui/x-date-pickers/AdapterMoment';
-import {ThemeProvider} from '@mui/material/styles';
-import {CssBaseline} from '@mui/material';
 import store from './redux/Store';
-import {Provider, useSelector} from 'react-redux';
+import {Provider} from 'react-redux';
 import {RouterProvider} from "react-router-dom";
 import router from '../src/navigation/Router';
-import {getTheme} from '../src/components/themes/customTheme';
 
-const ThemedApp =() =>{
-    const currentTheme = useSelector(state => state.theme.theme);
-    const theme = getTheme(currentTheme);
-
-    return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline/>
-            <LocalizationProvider dateAdapter={AdapterMoment}>
-                <RouterProvider router={router}/>
-            </LocalizationProvider>
-        </ThemeProvider>
-    );
-}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <ThemedApp/>
+            <LocalizationProvider dateAdapter={AdapterMoment}>
+                <RouterProvider router={router}/>
+            </LocalizationProvider>
         </Provider>
     </React.StrictMode>
 );
