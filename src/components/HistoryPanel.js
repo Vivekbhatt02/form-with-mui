@@ -105,6 +105,7 @@ export default function HistoryPanel() {
                 <Button
                     variant="contained"
                     sx={{width: "7rem", marginTop: "1rem", marginLeft: "auto"}}
+                    disabled={submissionHistory.length === 0}
                     onClick={handleClearHistory}>
                     Clear All
                 </Button>

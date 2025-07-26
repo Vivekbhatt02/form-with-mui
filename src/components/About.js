@@ -1,26 +1,27 @@
 import React from 'react';
 import {Box, Typography, Paper, Divider} from '@mui/material';
-
-const pageBackgroundColor = '#ffffff'
-
-const pageStyle = {
-    minHeight: '93vh',
-    bgcolor: '#f0f2f5',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    px: 2,
-};
-
-const paperStyle = {
-    maxWidth: '56.25rem',
-    width: '100%',
-    p: '2rem',
-    borderRadius: '1rem',
-    bgcolor: pageBackgroundColor,
-};
+import {useTheme} from '@mui/material/styles';
 
 export default function About() {
+    const theme = useTheme();
+
+    const pageStyle = {
+        minHeight: '93vh',
+        bgcolor: theme.palette.background.default,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        px: 2,
+    };
+
+    const paperStyle = {
+        maxWidth: '56.25rem',
+        width: '100%',
+        p: '2rem',
+        borderRadius: '1rem',
+        bgcolor: theme.palette.background.paper,
+    };
+
     return (
         <Box sx={pageStyle}>
             <Paper elevation={4} sx={paperStyle}>
