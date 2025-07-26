@@ -11,7 +11,7 @@ import DatePickerField from "./DatePickerField";
 import InputPreviewBox from "./InputPreviewBox";
 import {useSelector, useDispatch} from "react-redux";
 import {setIsPreviewDialogOpen, setShowSuccessMessage} from "../../feature/userform/userFormSlice";
-import CustomAlert from "../CustomAlert";
+import CustomAlert from "../alert/CustomAlert";
 
 export default function UserForm() {
     const theme = useTheme();

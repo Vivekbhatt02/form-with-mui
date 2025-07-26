@@ -11,9 +11,9 @@ import {
     deleteSelectedHistoryItem,
     setShowSuccessMessage,
     setShowDeleteConfirmation
-} from "../feature/userform/userFormSlice";
+} from "../../feature/userform/userFormSlice";
 import EditInfoDialog from "./EditInfoDialog";
-import CustomAlert from "./CustomAlert";
+import CustomAlert from "../alert/CustomAlert";
 
 export default function HistoryPanel() {
     const dispatch = useDispatch();

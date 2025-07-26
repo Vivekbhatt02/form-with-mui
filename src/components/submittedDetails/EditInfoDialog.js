@@ -11,10 +11,10 @@ import {
     setSelectedIndex,
     setShowSuccessMessage,
     updateHistoryItem, resetForm
-} from "../feature/userform/userFormSlice";
-import InputField from "./form/InputField";
-import GenderSelect from "./form/GenderSelect";
-import DatePickerField from "./form/DatePickerField";
+} from "../../feature/userform/userFormSlice";
+import InputField from "../form/InputField";
+import GenderSelect from "../form/GenderSelect";
+import DatePickerField from "../form/DatePickerField";
 import {Typography} from "@mui/material";
 
 const editDialogStyle = {
