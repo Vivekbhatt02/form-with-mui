@@ -1,7 +1,7 @@
 import {createBrowserRouter} from "react-router-dom";
 import PageLayout from "./PageLayout";
 import UserForm from "../components/form/UserForm";
-import HistoryPanel from "../components/HistoryPanel";
+import HistoryPanel from "../components/submittedDetails/HistoryPanel";
 import About from "../components/About";
 import React from "react";
 

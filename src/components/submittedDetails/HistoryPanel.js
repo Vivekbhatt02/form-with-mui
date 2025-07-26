@@ -1,6 +1,7 @@
+import React, {useState, useEffect} from "react";
 import Box from '@mui/material/Box';
 import {DataGrid} from '@mui/x-data-grid';
-import {Container, Typography} from "@mui/material";
+import {Container, Typography, Fade} from "@mui/material";
 import Button from "@mui/material/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -10,14 +11,19 @@ import {
     deleteSelectedHistoryItem,
     setShowSuccessMessage,
     setShowDeleteConfirmation
-} from "../feature/userform/userFormSlice";
+} from "../../feature/userform/userFormSlice";
 import EditInfoDialog from "./EditInfoDialog";
-import CustomAlert from "./CustomAlert";
-import React from "react";
+import CustomAlert from "../alert/CustomAlert";
 
 export default function HistoryPanel() {
     const dispatch = useDispatch();
     const {submissionHistory, isEditDialogOpen, showSuccessMessage, showDeleteConfirmation} = useSelector(state => state.userForm);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        setIsVisible(true);
+    }, []);
+
     const columns = [
         {
             field: 'name',
@@ -84,31 +90,34 @@ export default function HistoryPanel() {
 
     return (
         <>
-            <Container sx={{marginTop: '4rem', width: '60rem'}}>
-                <Typography variant="h6" sx={{fontWeight: '600', marginBottom: '1rem'}}>
-                    Submission History
-                </Typography>
-                <Box sx={{width: '100%'}}>
-                    <DataGrid
-                        disableRowSelectionOnClick
-                        rows={rows}
-                        columns={columns}
-                        initialState={{
-                            pagination: {
-                                paginationModel: {
-                                    pageSize: 5,
-                                },
-                            },
-                        }}
-                        pageSizeOptions={[5]}/>
-                </Box>
-                <Button
-                    variant="contained"
-                    sx={{width: "7rem", marginTop: "1rem", marginLeft: "auto"}}
-                    onClick={handleClearHistory}>
-                    Clear All
-                </Button>
-            </Container>
+            <Fade in={isVisible} timeout={800}>
+                <Container sx={{marginTop: '4rem', width: '60rem'}}>
+                    <Typography variant="h6" sx={{fontWeight: '600', marginBottom: '1rem'}}>
+                        Submission History
+                    </Typography>
+                        <Box sx={{width: '100%'}}>
+                            <DataGrid
+                                disableRowSelectionOnClick
+                                rows={rows}
+                                columns={columns}
+                                initialState={{
+                                    pagination: {
+                                        paginationModel: {
+                                            pageSize: 5,
+                                        },
+                                    },
+                                }}
+                                pageSizeOptions={[5]}/>
+                        </Box>
+                        <Button
+                            variant="contained"
+                            sx={{width: "7rem", marginTop: "1rem", marginLeft: "auto"}}
+                            disabled={submissionHistory.length === 0}
+                            onClick={handleClearHistory}>
+                            Clear All
+                        </Button>
+                </Container>
+            </Fade>
             {
                 isEditDialogOpen
                 &&

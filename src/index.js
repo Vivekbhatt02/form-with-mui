@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterMoment} from '@mui/x-date-pickers/AdapterMoment';
 import store from './redux/Store';
-import {Provider} from 'react-redux'
+import {Provider} from 'react-redux';
 import {RouterProvider} from "react-router-dom";
 import router from '../src/navigation/Router';
 
