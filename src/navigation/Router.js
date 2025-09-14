@@ -24,6 +24,8 @@ const router = createBrowserRouter([
             }
         ]
     }
-]);
+], {
+    basename: '/form-with-mui'
+});
 
 export default router;
